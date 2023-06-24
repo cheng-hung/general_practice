@@ -65,3 +65,30 @@ def axial_divergence(s, h, R):
 def capillary_width(d, R):
     import numpy as np
     return (180/np.pi)*(d)/(2*R)
+
+
+
+'''
+Calculate global mean and standard deviation with probability
+https://stackoverflow.com/questions/67545203/how-to-calculate-standard-deviation-in-python-when-x-and-px-are-known
+https://www.rapidtables.com/calc/math/variance-calculator.html                           
+https://stats.stackexchange.com/questions/210472/negative-variance-result-when-calculating-standard-deviation
+'''
+def mean_std_pro(x, pro):
+    x = np.asarray(x)
+    pro = np.asarray(pro)
+            
+    ex = x * pro
+    # ex2 = x**2 * pro
+    mean = ex.sum() / pro.sum()
+    # variance = ex2.sum() - ex.sum()**2
+    var = (x-mean)**2 * pro
+    
+    if round(pro.sum()) == 1:
+        variance = var.sum()
+    else:
+        variance = var.sum()/(pro.sum()-1)
+        
+    std_dev = variance**0.5
+
+    return mean, std_dev
