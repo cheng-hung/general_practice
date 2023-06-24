@@ -92,3 +92,15 @@ def mean_std_pro(x, pro):
     std_dev = variance**0.5
 
     return mean, std_dev
+
+
+
+'''
+Calculate Biso to Uiso or vice versa
+'''
+def Biso_to_Uiso(b):
+    return b/(8*np.pi**2)
+
+def Uiso_to_Biso(u):
+    return u*(8*np.pi**2)  
+
