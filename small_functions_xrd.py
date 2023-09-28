@@ -9,8 +9,8 @@ http://pd.chem.ucl.ac.uk/pdnn/refine1/rfacs.htm
 '''
 def rwp_delta(y_obs, y_calc, weight='count'):
     
-    y_obs = np.asarray(y_obs)
-    y_calc = np.asarray(y_calc)
+    y_obs = np.float32(y_obs)
+    y_calc = np.float32(y_calc)
     
     if weight == 'count':
         w = 1/y_obs
@@ -29,8 +29,8 @@ https://math.stackexchange.com/questions/772391/normalization-for-chi-square-tes
 '''
 def chi2_gof(y_obs, y_calc):
     
-    y_obs = np.asarray(y_obs)
-    y_calc = np.asarray(y_calc)
+    y_obs = np.float32(y_obs)
+    y_calc = np.float32(y_calc)
     
     y0 = y_obs/len(y_obs)
     y1 = y_calc/len(y_calc)
@@ -75,8 +75,8 @@ https://www.rapidtables.com/calc/math/variance-calculator.html
 https://stats.stackexchange.com/questions/210472/negative-variance-result-when-calculating-standard-deviation
 '''
 def mean_std_pro(x, pro):
-    x = np.asarray(x)
-    pro = np.asarray(pro)
+    x = np.float32(x)
+    pro = np.float32(pro)
             
     ex = x * pro
     # ex2 = x**2 * pro
