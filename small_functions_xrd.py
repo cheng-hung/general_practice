@@ -104,3 +104,12 @@ def Biso_to_Uiso(b):
 def Uiso_to_Biso(u):
     return u*(8*np.pi**2)  
 
+
+
+'''
+find slice postion in a string according to some keys
+'''
+def idx_string(string, key='_'):
+    return 
+
+
