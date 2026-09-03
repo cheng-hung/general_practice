@@ -1,0 +1,10 @@
+name: exspy
+channels:
+  - conda-forge
+dependencies:
+  - exspy
+  - hyperspy-gui-ipywidgets>=2.0
+  - ipympl
+  - numba
+  - numexpr
+  - scikit-learn

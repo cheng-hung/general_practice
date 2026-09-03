@@ -1,0 +1,97 @@
+[project]
+name = "MapEX"
+version = "1.0.4"
+description = "GUI toolkit for X-ray map analysis"
+requires-python = ">=3.9"
+dependencies = [
+    "numpy",
+    "pandas",
+    "matplotlib",
+    "pyqt5", 
+    "ipython",
+    "scikit-learn",
+    "scipy",
+    "joblib",
+    "h5py",
+    "openpyxl", 
+    "opencv-python"
+]
+
+# --- Required if you ever build/publish the project (PEP 517/518) ---
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+# --------------------
+# Black (formatter)
+# --------------------
+[tool.black]
+line-length = 120
+target-version = ["py39"]
+
+# --------------------
+# Ruff (linter, incl. isort rules)
+# --------------------
+[tool.ruff]
+line-length = 120
+target-version = "py39"
+# Skip heavy or irrelevant paths during lint
+exclude = [
+  ".git",
+  ".venv",
+  "venv",
+  "env",
+  "build",
+  "dist",
+  "__pycache__",
+  ".mypy_cache",
+  ".ruff_cache",
+  ".pytest_cache",
+  "data",            # skip large datasets from linting
+  "outputs",
+]
+
+[tool.ruff.lint]
+# Be explicit (clearer than extend-select)
+select = [
+  "E",   # pycodestyle
+  "F",   # pyflakes
+  "I",   # import sorting (isort rules via Ruff)
+  "N",   # pep8-naming
+  "UP",  # pyupgrade
+  # "B", # flake8-bugbear (uncomment when you're ready to tighten)
+]
+ignore = [
+  "E203",  # black-compatible slicing
+  "N803",  # arg name lowercase (temporarily allowed)
+  "N806",  # var name lowercase (temporarily allowed)
+]
+
+# Keep Qt camelCase exceptions scoped only to GUI-heavy files
+[tool.ruff.lint.per-file-ignores]
+"visualization_step.py" = ["N802"]
+"preanalysis_step.py"   = ["N802"]
+"phase_mapping_step.py" = ["N802"]
+"calibration.py"        = ["N802"]
+"main.py"               = ["N802"]   
+
+# Let Ruff/isort know your first-party modules if you have a package.
+# If you do NOT have a package named "mapex", remove/adjust this.
+[tool.ruff.lint.isort]
+# known-first-party = ["mapex"]
+
+# --------------------
+# isort (if you run isort separately)
+# --------------------
+[tool.isort]
+profile = "black"
+
+
+[tool.pixi.workspace]
+channels = ["conda-forge"]
+platforms = ["osx-arm64"]
+
+[tool.pixi.pypi-dependencies]
+MapEX = { path = ".", editable = true }
+
+[tool.pixi.tasks]
