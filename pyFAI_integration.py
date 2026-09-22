@@ -4,17 +4,25 @@ import pandas as pd
 import tifffile
 import numpy.ma as ma
 
-def iq_saver(fn, df, md, header=['q_A^-1', 'I(q)']):
-    
-    with open(fn, mode='w', encoding='utf-8') as f:
-        f.write('pyFai_poni_information_28ID1_NSLS2_BNL\n')
+def iq_saver(fn, df, md, header=("#q_A^-1", "I(q)")):
+
+    with open(fn, mode="w", encoding="utf-8") as f:
+        f.write("# pyFai_poni_information_28ID1_NSLS2_BNL\n")
         num_row = 1
         for key, value in md.items():
-            f.write(f'{key} {value}\n')
+            f.write(f"# {key} {value}\n")
             num_row += 1
-    
+
     ## Now append the dataframe
-    df.to_csv(fn, encoding='utf-8', mode='a', header=header, index=False, float_format='{:.8e}'.format, sep=' ')
+    df.to_csv(
+        fn,
+        encoding="utf-8",
+        mode="a",
+        header=header,
+        index=False,
+        float_format="{:.8e}".format,
+        sep=" ",
+    )
 
     ## return the number of rows of the header
     return num_row
